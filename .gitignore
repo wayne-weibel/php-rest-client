@@ -1,1 +1,5 @@
+README.html
+ops/tests/.cache
+ops/tests/coverage
+ops/tests/logs
 /vendor/

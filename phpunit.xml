@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- For how to customize PHPUnit configuration, see core/tests/README.md. -->
+<!-- https://phpunit.readthedocs.io/en/9.5/configuration.html -->
+<!-- https://github.com/sebastianbergmann/phpunit/blob/master/src/Framework/TestCase.php -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         cacheResult="true"
+         cacheResultFile="tests/cache/phpunit"
+         colors="true"
+         columns="73"
+         processIsolation="true"
+         failOnWarning="true"
+         beStrictAboutChangesToGlobalState="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         verbose="true"
+         defaultTestSuite="unit">
+
+  <php>
+    <ini name="error_reporting" value="E_ALL"/>
+    <ini name="memory_limit" value="-1"/>
+    <ini name="log_errors_max_len" value="0"/>
+    <ini name="zend.assertions" value="1"/>
+    <ini name="zend_extension" value="xdebug"/>
+    <ini name="assert.exception" value="1"/>
+    <ini name="xdebug.show_exception_trace" value="0"/>
+    <ini name="xdebug.mode" value="coverage"/>
+
+    <env name="XDEBUG_MODE" value="coverage"/>
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
+
+    <env name="SIMPLETEST_BASE_URL" value="http://127.0.0.1"/>
+    <env name="SIMPLETEST_DB" value="sqlite://localhost/simpletest.sqlite"/>
+
+    <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="tests/simpletest"/>
+    <env name="BROWSERTEST_OUTPUT_BASE_URL" value=""/>
+
+    <env name="MINK_DRIVER_CLASS" value=""/>
+    <env name="MINK_DRIVER_ARGS" value=""/>
+    <env name="MINK_DRIVER_ARGS_WEBDRIVER" value=""/>
+  </php>
+
+  <testsuites>
+    <testsuite name="unit">
+      <directory>src</directory>
+    </testsuite>
+  </testsuites>
+
+  <listeners>
+    <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+  </listeners>
+
+  <logging>
+    <text outputFile="tests/logs/phpunit.log"></text>
+    <junit outputFile="tests/logs/phpunit.junit.xml"></junit>
+    <teamcity outputFile="tests/logs/phpunit.teamcity"></teamcity>
+    <testdoxHtml outputFile="tests/logs/phpunit.testdox.html"></testdoxHtml>
+    <testdoxText outputFile="tests/logs/phpunit.testdox.text"></testdoxText>
+  </logging>
+
+  <!--
+  Coverage reporting requires XDEBUG, which may not be installed:
+  https://xdebug.org/docs/install
+  -->
+  <coverage cacheDirectory="tests/cache/coverage"
+            includeUncoveredFiles="true"
+            processUncoveredFiles="false"
+            pathCoverage="true"
+            ignoreDeprecatedCodeUnits="false"
+            disableCodeCoverageIgnore="true">
+    <report>
+      <html outputDirectory="tests/coverage/html" />
+      <xml outputDirectory="tests/coverage/xml" />
+      <text outputFile="tests/coverage/coverage.text" showUncoveredFiles="true" />
+      <clover outputFile="tests/coverage/coverage.clover.xml" />
+    </report>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+    <exclude>
+      <directory>tests</directory>
+    </exclude>
+  </coverage>
+
+</phpunit>
