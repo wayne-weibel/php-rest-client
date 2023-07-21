@@ -1,0 +1,19 @@
+{
+    "name": "wayne-weibel/php-rest-client",
+    "type": "project",
+    "require": {
+        "guzzlehttp/guzzle": "^7.7"
+    },
+    "license": "GNU General Public License v3.0",
+    "autoload": {
+        "psr-4": {
+            "WayneWeibel\\PhpRestClient\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wayne Weibel",
+            "email": "whweibel@gmail.com"
+        }
+    ]
+}
